@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
+
 class PostController extends Controller
 {
     public function store(Request $request)
@@ -53,6 +54,7 @@ class PostController extends Controller
             abort(403);
         }
 
+
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
@@ -93,5 +95,4 @@ class PostController extends Controller
             ->route('posts.index')
             ->with('success', 'All posts deleted successfully');
     }
-
 }

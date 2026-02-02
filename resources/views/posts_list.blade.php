@@ -17,7 +17,14 @@
                 <input type="text" name="description" class="inputs_post">
 
                 <label class="labels_post">Status</label>
-                <input type="text" name="status" class="inputs_post">
+                <select name="status" class="inputs_post">
+                    <option value="pending">
+                        Pending
+                    </option>
+                    <option value="completed">
+                        Completed
+                    </option>
+                </select>
 
                 <button type="submit" class="btn_post">SUBMIT</button>
             </form>

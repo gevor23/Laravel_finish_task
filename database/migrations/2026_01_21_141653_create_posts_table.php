@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->timestamp('archived_at')->nullable();
             $table->timestamps();
         });
     }
