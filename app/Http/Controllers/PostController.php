@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -28,7 +29,6 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::where('user_id', auth()->id())->latest()->get();
-
         return view('posts', compact('posts'));
     }
     public function info()
@@ -94,5 +94,14 @@ class PostController extends Controller
         return redirect()
             ->route('posts.index')
             ->with('success', 'All posts deleted successfully');
+    }
+
+    public function showPosts(){
+        $users = User::with([
+            'posts' => function ($query) {
+                $query->latest()->take(3);
+            }
+        ])->get();
+        return view('show_posts', compact('users'));
     }
 }
