@@ -8,7 +8,7 @@
     <div class="py-12">
         <section class="center">
 
-            <form action="{{ route('posts.update', $post) }}" method="POST">
+            <form action="{{ route('posts.update', $post) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -31,7 +31,7 @@
                         Completed
                     </option>
                 </select>
-
+                <input type="file" name="image" class="inputs_post" style="margin-top: 20px;display: block">
                 <button type="submit" class="btn_post">
                     UPDATE
                 </button>

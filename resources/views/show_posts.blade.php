@@ -16,6 +16,9 @@
             <ul>
                 @foreach($user->posts as $post)
                     <li style="border-bottom: 1px solid; list-style-type: square; ">
+                        @if($post->image)
+                            <img src="{{ asset('storage/' . $post->image) }}" width="200">
+                        @endif
                         <p><strong>Title:</strong> {{ $post->title }}</p>
                         <p><strong>Description:</strong> {{ $post->description }}</p>
                         <p><strong>Status:</strong> {{ $post->status }}</p>

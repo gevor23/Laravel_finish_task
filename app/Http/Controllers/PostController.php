@@ -15,13 +15,21 @@ class PostController extends Controller
             'title' => 'required | string',
             'description' => 'required | string',
             'status' => 'required | in:pending,completed',
+            'image' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        $imagePath = null;
+
+        if($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        }
 
         Post::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
             'status' => $request->status,
+            'image' => $imagePath,
         ]);
 
         return redirect('/posts');
@@ -57,12 +65,20 @@ class PostController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'status' => 'required|in:pending,completed',
+            'image' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        $imagePath = null;
+
+        if($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        }
 
         $post->update([
             'title' => $request->title,
             'description' => $request->description,
             'status' => $request->status,
+            'image' => $imagePath,
         ]);
 
         return redirect()->route('posts.index');

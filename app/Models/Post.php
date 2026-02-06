@@ -12,5 +12,6 @@ class Post extends Model
         'title',
         'description',
         'status',
+        'image',
     ];
 }
