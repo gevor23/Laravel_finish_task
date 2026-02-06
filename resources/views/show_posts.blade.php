@@ -29,5 +29,8 @@
         @endif
     </div>
 @endforeach
+<div style="margin-top: 20px">
+    {{ $users->links() }}
+</div>
 </body>
 </html>

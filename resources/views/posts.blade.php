@@ -55,7 +55,9 @@
         @else
             <p>No posts yet.</p>
         @endif
-
+    </div>
+    <div style="margin-top: 20px">
+        {{$posts->links()}}
     </div>
 
 </x-app-layout>

@@ -25,6 +25,9 @@
                 <p>No posts yet.</p>
             @endif
         </div>
+        <div style="margin-top: 20px">
+            {{$posts->links()}}
+        </div>
     </div>
 </x-app-layout>
 

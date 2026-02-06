@@ -28,19 +28,18 @@ class PostController extends Controller
     }
     public function index()
     {
-        $posts = Post::where('user_id', auth()->id())->latest()->get();
+        $posts = Post::where('user_id', auth()->id())->latest()->paginate(10);
         return view('posts', compact('posts'));
     }
     public function info()
     {
-        $posts = Post::where('user_id', auth()->id())->latest()->get();
+        $posts = Post::where('user_id', auth()->id())->latest()->paginate(10);
 
         return view('view_info', compact('posts'));
     }
 
     public function edit(Post $post)
     {
-        // security – ուրիշի post-ը չբացվի
         if ($post->user_id !== auth()->id()) {
             abort(403);
         }
@@ -53,7 +52,6 @@ class PostController extends Controller
         if ($post->user_id !== auth()->id()) {
             abort(403);
         }
-
 
         $request->validate([
             'title' => 'required|string',
@@ -72,7 +70,6 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        // Security check
         if ($post->user_id !== auth()->id()) {
             abort(403);
         }
@@ -97,11 +94,14 @@ class PostController extends Controller
     }
 
     public function showPosts(){
-        $users = User::with([
+        /*$users = User::with([
             'posts' => function ($query) {
                 $query->latest()->take(3);
             }
-        ])->get();
+        ])->get();*/
+        $users = User::whereHas('posts')
+            ->with('posts')
+            ->paginate(10);
         return view('show_posts', compact('users'));
     }
 }
